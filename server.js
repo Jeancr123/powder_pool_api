@@ -5,10 +5,11 @@ const authenticateUser = require('./utils/auth_check')
 const signUp = require('./controllers/sign_up')
 const login = require('./controllers/login')
 const getResorts = require('./controllers/get_resorts')
-// const getCarpools = require('./controllers/get_carpools')
+const getCarpools = require('./controllers/get_carpools')
+const getCarpoolsByResortId = require('./controllers/get_carpools_by_resort_id')
 const newCarpool = require('./controllers/save_carpool')
 // const joinCarpool = require('./controllers/join_carpool')
-// const getCarpool = require('./controllers/get_carpool')
+const getCarpoolConversation = require('./controllers/get_carpool_conversation')
 // const carpoolMessage = require('./controllers/carpool_message')
 const seedAndSync = require('./controllers/seed_and_sync')
 
@@ -29,10 +30,12 @@ app.get('/', (req, res) => {
 app.get('/seed_and_sync', seedAndSync)
 app.post('/signup', signUp)
 app.post('/login', login)
-// app.get('/carpools', getCarpools);
+app.get('/carpools', getCarpools);
 app.get('/resorts', getResorts);
 app.post('/new_carpool', authenticateUser, newCarpool);
 // app.get('/join_carpool', authenticateUser, joinCarpool);
+app.get('/get_carpools_by_resort/:resortId', authenticateUser, getCarpoolsByResortId);
+app.get('/get_carpool_conversation/:carpoolId', authenticateUser, getCarpoolConversation);
 // app.get('/get_carpool/:carpoolId', authenticateUser, getCarpool);
 // app.post('/carpool_message', authenticateUser, carpoolMessage)
 app.get('/healthz', (req, res) => {
