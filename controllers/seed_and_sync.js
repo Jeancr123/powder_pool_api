@@ -13,8 +13,8 @@ module.exports = (req, res, next) => {
               Resort.create(e)
             })
           })
-          res.json({'message': 'completed'})
+          return res.json({'message': 'completed'})
     } catch (e) {
-        res.status(500).json({ error: 'internal_server_error' });
+        return res.status(500).json({ error: 'internal_server_error' });
     }
   };

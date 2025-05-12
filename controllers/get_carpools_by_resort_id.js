@@ -3,7 +3,12 @@ const {Carpool}  = require('../models/index');
 
 module.exports = async (req, res) => {
     try {
-      const allCarpools = await Carpool.findAll();
+      const { resortId } = req.params;
+      const allCarpools = await Carpool.findAll({
+        where: {
+          resortId: resortId
+        }
+      });
       return res.status(200).json(allCarpools);
     } catch (error) {
       console.error('Error fetching carpools:', error);

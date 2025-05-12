@@ -16,6 +16,6 @@ module.exports = async (req, res) => {
       return res.status(201).json({ message: 'joined_successfully', carpool: carpool });
     } catch (error) {
       console.error('Error joining carpool:', error);
-      res.status(500).json({ error: 'internal_server_error' });
+      return res.status(500).json({ error: 'internal_server_error' });
     }
   }

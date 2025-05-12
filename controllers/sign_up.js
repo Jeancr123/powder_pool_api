@@ -28,6 +28,6 @@ module.exports = async (req, res) => {
       return res.status(201).json({ token });
     } catch (error) {
         console.error('Error during signup:', error);
-        res.status(500).json({ error: 'internal_server_error' });
+       return res.status(500).json({ error: 'internal_server_error' });
     }
 };

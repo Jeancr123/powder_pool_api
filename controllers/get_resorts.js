@@ -7,6 +7,6 @@ module.exports = async (req, res) => {
       return res.status(200).json(allResorts);
     } catch (error) {
       console.error('Error fetching resorts:', error);
-      res.status(500).json({ error: 'internal_server_error' });
+     return res.status(500).json({ error: 'internal_server_error' });
     }
   }
