@@ -4,7 +4,6 @@ const cors = require('cors');
 const authenticateUser = require('./utils/auth_check')
 const signUp = require('./controllers/signup')
 const login = require('./controllers/login')
-// const getPurchase = require('./controllers/get_purchase_details')
 const getCarpools = require('./controllers/get_plans')
 const newCarpool = require('./controllers/new_carpool')
 const joinCarpool = require('./controllers/join_carpool')
@@ -25,7 +24,7 @@ app.get('/', (req, res) => {
     res.json({'message': 'OK'})
 });
 
-// app.post('/seed_and_sync', seedAndSync)
+
 app.get('/seed_and_sync', seedAndSync)
 app.post('/signup', signUp)
 app.post('/login', login)
