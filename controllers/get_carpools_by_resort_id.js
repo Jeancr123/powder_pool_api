@@ -1,4 +1,4 @@
-const {Carpool}  = require('../models/index');
+const {Carpool, User}  = require('../models/index');
 
 
 module.exports = async (req, res) => {
@@ -7,7 +7,12 @@ module.exports = async (req, res) => {
       const allCarpools = await Carpool.findAll({
         where: {
           resortId: resortId
-        }
+        },
+        include: [
+        {
+          model: User,
+          as: 'creator',
+        },]
       });
       return res.status(200).json(allCarpools);
     } catch (error) {
