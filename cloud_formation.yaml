@@ -1,0 +1,120 @@
+Resources:
+  CloudFormationKeyPair:
+    Type: AWS::EC2::KeyPair
+    Properties:
+      KeyName: PowderPoolKeyPair
+
+  MyDbSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: manage-plans-db-secret
+      Description: Credentials for Manage Plans PostgreSQL DB
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "dbadmin", "password": "GreenEnergyIsCool", "jwt_secret": "GreenEnergyIsCool"}'
+        GenerateStringKey: "password"
+        ExcludeCharacters: '"@/\\'
+
+  PowderPoolNodejsDeploySG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: for the app nodes that allow ssh, http, postgres
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '8000'
+          ToPort: '8000'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '5432'
+          ToPort: '5432'
+          CidrIp: 0.0.0.0/0
+
+  PowderPoolDB:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Retain
+    Properties:
+      DBName: powderpool
+      AllocatedStorage: 20
+      DBInstanceClass: db.t3.micro
+      Engine: postgres
+      # EngineVersion: 15.2
+      MasterUsername: !Join ['', [ '{{resolve:secretsmanager:', !Ref MyDbSecret, ':SecretString:username}}' ]]
+      MasterUserPassword: !Join ['', [ '{{resolve:secretsmanager:', !Ref MyDbSecret, ':SecretString:password}}' ]]
+      VPCSecurityGroups:
+        - !GetAtt PowderPoolNodejsDeploySG.GroupId
+      PubliclyAccessible: true
+
+  PowderPoolInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: SecretsManagerAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource: !Ref MyDbSecret
+
+  PowderPoolInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref PowderPoolInstanceRole
+
+  PowderPoolNodejsDeploy:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-058a8a5ab36292159
+      KeyName: !Ref CloudFormationKeyPair
+      IamInstanceProfile: !Ref PowderPoolInstanceProfile
+      SecurityGroups:
+        - !Ref PowderPoolNodejsDeploySG
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -e
+          curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+          yum install -y nodejs git jq aws-cli
+          npm install -g yarn
+          npm install -g pm2
+          cd /home/ec2-user
+          git clone https://github.com/Jeancr123/manage_plans_server.git
+          cd manage_plans_server
+          yarn install
+
+          SECRET_JSON=$(aws secretsmanager get-secret-value --secret-id manage-plans-db-secret --region ${AWS::Region} | jq -r .SecretString)
+          DB_USER=$(echo $SECRET_JSON | jq -r .username)
+          DB_PASS=$(echo $SECRET_JSON | jq -r .password)
+          DB_HOST="${PowderPoolDB.Endpoint.Address}"
+          JWT_SECRET=$(echo $SECRET_JSON | jq -r .jwt_secret)
+
+          cat > .env <<EOF
+          DB_TYPE=postgres
+          DB_HOST=$DB_HOST
+          DB_PORT=5432
+          DB_NAME=powderpool
+          DB_USER=$DB_USER
+          DB_PASSWORD=$DB_PASS
+          JWT_SECRET=$JWT_SECRET
+          EOF
+
+          pm2 start yarn --name sample_node -- start -p 8000
+          pm2 save
+          pm2 startup systemd -u ec2-user --hp /home/ec2-user
