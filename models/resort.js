@@ -40,6 +40,11 @@ const Resort = sequelize.define('resort', {
     type: DataTypes.STRING,
     allowNull: true
   },
+  imageUrl: {
+    type: DataTypes.STRING,
+    allowNull: true
+  }
+
   }); 
 
 module.exports = Resort;
