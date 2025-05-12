@@ -4,35 +4,29 @@ const resortSeeds = require("../dev-data/resorts");
 const userSeeds = require("../dev-data/users");
 const { User, Resort, Carpool } = require("../models");
 
-module.exports = (req, res, next) => {
-    try {
-      var userIds = []
-      var resortIds = []
+module.exports = async (req, res, next) => {
+  try {
+    await sequelize.sync({ force: true });
 
-        sequelize.sync({force: true}).then(() => {
-            userSeeds.map((e) => {
-              var newUser = User.create(e)
-              userIds.push(newUser.id)
-            })
-            resortSeeds.map((e) => {
-              var newResort = Resort.create(e)
-              resortIds.push(newResort.id)
-            })
+    const newUsers = await Promise.all(userSeeds.map((e) => User.create(e)));
+    const userIds = newUsers.map((u) => u.id);
 
-            var adjustedCarpools = carpoolSeeds.map((e) => {
-              e.creatorId = userIds[Math.floor(Math.random() * userIds.length)]
-              e.resortId = resortIds[Math.floor(Math.random() * resortIds.length)]
-              return e
-            })
+    const newResorts = await Promise.all(resortSeeds.map((e) => Resort.create(e)));
+    const resortIds = newResorts.map((r) => r.id);
 
-            adjustedCarpools.map((e) => {
-              Carpool.create(e)
-            })
+    const adjustedCarpools = carpoolSeeds.map((e) => {
+      return {
+        ...e,
+        createdBy: userIds[Math.floor(Math.random() * userIds.length)],
+        resortId: resortIds[Math.floor(Math.random() * resortIds.length)],
+      };
+    });
 
+    await Promise.all(adjustedCarpools.map((e) => Carpool.create(e)));
 
-          })
-          return res.json({'message': 'completed'})
-    } catch (e) {
-        return res.status(500).json({ error: 'internal_server_error' });
-    }
-  };
+    return res.json({ message: 'completed' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: 'internal_server_error' });
+  }
+};

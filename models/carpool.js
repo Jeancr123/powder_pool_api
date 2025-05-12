@@ -18,7 +18,7 @@ const Carpool = sequelize.define('carpool', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
     },
     description: {
       type: DataTypes.TEXT,
