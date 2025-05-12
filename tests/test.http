@@ -43,7 +43,7 @@ GET {{base_url}}/resorts
 ###
 POST {{base_url}}/new_carpool
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDlhN2JhNi1kYjM3LTQzZTQtYmUzZS03MzA2OTNiYmMzODgiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM3OTU1LCJleHAiOjE3NDcwNDE1NTV9.wqXGjSimyIFKFnxgZY60AZMNWKPg-qw4rFDGth_Zke8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzOWVjMTE4Mi00M2I1LTQ1YWUtOThlOC00OTQ2NzE2N2NjMjYiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM4MzAyLCJleHAiOjE3NDcwNDE5MDJ9.aK2F396R5Bd365vY4kRsoMSBh9Wi-Ax6Uod2nmOXlDc
 
 {
   "name": "Bluebird Powder Day Crew",
@@ -52,7 +52,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDlhN2JhNi1k
   "meetUpCity": "Salt Lake City",
   "meetUpState": "UT",
   "meetUpZipCode": "84121",
-  "resortId": "94992cc1-c9a3-436b-9af3-552bc9911cd7",
+  "resortId": "0c35a20a-f47d-4217-953a-a056a87ab78e",
   "departureDate": "2025-01-15T06:00:00.000Z",
   "departureTime": "6:00 AM",
   "returningDate": "2025-01-15T16:00:00.000Z",
@@ -64,30 +64,30 @@ GET {{base_url}}/carpools
 
 
 ###
-GET {{base_url}}/get_carpools_by_resort/94992cc1-c9a3-436b-9af3-552bc9911cd7
+GET {{base_url}}/get_carpools_by_resort/0c35a20a-f47d-4217-953a-a056a87ab78e
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDlhN2JhNi1kYjM3LTQzZTQtYmUzZS03MzA2OTNiYmMzODgiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM4MTE0LCJleHAiOjE3NDcwNDE3MTR9.XcjttId-Ge9W7J-BtRj3n3XiabOMDo9xTmuqrQBvGqc
 
 ### Get carpool conversation with messages, creator, and participants
 
-GET {{base_url}}/get_conversation_by_carpool/ee7cbea9-7a7f-41e4-b773-f0e1259d0af9
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDlhN2JhNi1kYjM3LTQzZTQtYmUzZS03MzA2OTNiYmMzODgiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM4MTE0LCJleHAiOjE3NDcwNDE3MTR9.XcjttId-Ge9W7J-BtRj3n3XiabOMDo9xTmuqrQBvGqc
+GET {{base_url}}/get_conversation_by_carpool/01458415-bc04-4a2b-b8d1-32e33ce9aa71
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzOWVjMTE4Mi00M2I1LTQ1YWUtOThlOC00OTQ2NzE2N2NjMjYiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM4NDE0LCJleHAiOjE3NDcwNDIwMTR9.Hdui8gbH2pHU85JLzmtQR01H3UD02GGcGgcGaaEdhxU
 
 ###
 POST {{base_url}}/new_conversation_message
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDlhN2JhNi1kYjM3LTQzZTQtYmUzZS03MzA2OTNiYmMzODgiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM4MTE0LCJleHAiOjE3NDcwNDE3MTR9.XcjttId-Ge9W7J-BtRj3n3XiabOMDo9xTmuqrQBvGqc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzOWVjMTE4Mi00M2I1LTQ1YWUtOThlOC00OTQ2NzE2N2NjMjYiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM4NDE0LCJleHAiOjE3NDcwNDIwMTR9.Hdui8gbH2pHU85JLzmtQR01H3UD02GGcGgcGaaEdhxU
 
 {
-  "carpoolId": "ee7cbea9-7a7f-41e4-b773-f0e1259d0af9",
+  "carpoolId": "01458415-bc04-4a2b-b8d1-32e33ce9aa71",
   "messageText": "Hey everyone! Who's in for the carpool?"
 }
 
 ###
 POST {{base_url}}/new_conversation_message
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDlhN2JhNi1kYjM3LTQzZTQtYmUzZS03MzA2OTNiYmMzODgiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM4MTE0LCJleHAiOjE3NDcwNDE3MTR9.XcjttId-Ge9W7J-BtRj3n3XiabOMDo9xTmuqrQBvGqc
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzOWVjMTE4Mi00M2I1LTQ1YWUtOThlOC00OTQ2NzE2N2NjMjYiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM4NDE0LCJleHAiOjE3NDcwNDIwMTR9.Hdui8gbH2pHU85JLzmtQR01H3UD02GGcGgcGaaEdhxU
 
 {
-  "carpoolId": "ee7cbea9-7a7f-41e4-b773-f0e1259d0af9",
+  "carpoolId": "01458415-bc04-4a2b-b8d1-32e33ce9aa71",
   "messageText": "Hoping to leave by 6:00 AM. Can take my car."
 }
