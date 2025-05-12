@@ -7,6 +7,6 @@ module.exports = async (req, res) => {
       res.status(200).json(allPlans);
     } catch (error) {
       console.error('Error fetching carpools:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: 'internal_server_error' });
     }
   }

@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   
       if (!user || !(await bcrypt.compare(password, user.password))) {
 
-        return res.status(401).json({ error: 'Invalid credentials' + user });
+        return res.status(401).json({ error: 'invalid_credentials' + user });
       }
   
       const token = jwt.sign({ userId: user.id, userEmail: user.email }, process.env.JWT_KEY, {
