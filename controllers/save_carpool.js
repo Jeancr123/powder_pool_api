@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
 
     const carpoolJson = req.body;
     const carpool = Carpool.build(carpoolJson);
-    carpool.userId = req.user.userId;
+    carpool.createdBy = req.user.userId;
 
     try {
       await carpool.save();
