@@ -9,8 +9,8 @@ const ConversationMessage = require("./conversation_message");
 Vehicle.belongsTo(User);
 Carpool.hasMany(User, {as: 'users'});
 Carpool.belongsTo(Resort);
-CarpoolMessage.belongsTo(Conversation);
-CarpoolMessage.belongsTo(User);
+ConversationMessage.belongsTo(Conversation);
+ConversationMessage.belongsTo(User);
 User.hasMany(Carpool, {as: 'carpools'});
 
   module.exports = {
