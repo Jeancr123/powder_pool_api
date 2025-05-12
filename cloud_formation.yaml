@@ -1,8 +1,8 @@
 Resources:
-  CloudFormationApiKeyPair:
+  CloudFormationKeyPair:
     Type: AWS::EC2::KeyPair
     Properties:
-      KeyName: PowderPoolApiKeyPair
+      KeyName: PowderPoolKeyPair
 
   MyDbSecret:
     Type: AWS::SecretsManager::Secret
@@ -82,7 +82,7 @@ Resources:
     Properties:
       InstanceType: t2.micro
       ImageId: ami-058a8a5ab36292159
-      KeyName: !Ref CloudFormationApiKeyPair
+      KeyName: !Ref CloudFormationKeyPair
       IamInstanceProfile: !Ref PowderPoolInstanceProfile
       SecurityGroups:
         - !Ref PowderPoolNodejsDeploySG
