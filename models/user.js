@@ -45,11 +45,11 @@ const User = sequelize.define('user', {
   });
 
   
-User.beforeCreate(async (user) => {
-  if (user.password) {
-    const saltRounds = 10;
-    user.password = await bcrypt.hash(user.password, saltRounds);
-  }
-});
+// User.beforeCreate(async (user) => {
+//   if (user.password) {
+//     const saltRounds = 10;
+//     user.password = await bcrypt.hash(user.password, saltRounds);
+//   }
+// });
 
 module.exports = User;
