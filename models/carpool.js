@@ -64,10 +64,6 @@ const Carpool = sequelize.define('carpool', {
       type: DataTypes.STRING,
       allowNull: false
     },
-    users: {
-      type: DataTypes.ARRAY(DataTypes.UUID),
-      allowNull: false
-    },
   });
 
 
