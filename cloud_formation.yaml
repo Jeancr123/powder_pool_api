@@ -1,8 +1,8 @@
 Resources:
-  CloudFormationKeyPair:
+  CloudFormationApiKeyPair:
     Type: AWS::EC2::KeyPair
     Properties:
-      KeyName: PowderPoolKeyPair
+      KeyName: PowderPoolApiKeyPair
 
   MyDbSecret:
     Type: AWS::SecretsManager::Secret
@@ -82,7 +82,7 @@ Resources:
     Properties:
       InstanceType: t2.micro
       ImageId: ami-058a8a5ab36292159
-      KeyName: !Ref CloudFormationKeyPair
+      KeyName: !Ref CloudFormationApiKeyPair
       IamInstanceProfile: !Ref PowderPoolInstanceProfile
       SecurityGroups:
         - !Ref PowderPoolNodejsDeploySG
@@ -103,7 +103,7 @@ Resources:
           DB_USER=$(echo $SECRET_JSON | jq -r .username)
           DB_PASS=$(echo $SECRET_JSON | jq -r .password)
           DB_HOST="${PowderPoolDB.Endpoint.Address}"
-          JWT_SECRET=$(echo $SECRET_JSON | jq -r .jwt_secret)
+          JWT_KEY=$(echo $SECRET_JSON | jq -r .jwt_secret)
 
           cat > .env <<EOF
           DB_TYPE=postgres
@@ -112,7 +112,7 @@ Resources:
           DB_NAME=powderpool
           DB_USER=$DB_USER
           DB_PASSWORD=$DB_PASS
-          JWT_SECRET=$JWT_SECRET
+          JWT_KEY=$JWT_KEY
           EOF
 
           pm2 start yarn --name sample_node -- start -p 8000
