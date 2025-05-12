@@ -43,7 +43,7 @@ GET {{base_url}}/resorts
 ###
 POST {{base_url}}/new_carpool
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5Yzg0MGMyZC03N2RiLTQ0YTctODk1OS1mNmM1NGQyYjllNTAiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDMzNzk0LCJleHAiOjE3NDcwMzczOTR9.EYxb1b5ul-sjFZgLsGW9v1EOiLMLIBtc8xZXs_1kjdo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlZjE2NWUwMy1kOTE2LTRhNTItOTY0YS05NDJhNmRhMjRiZGUiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM0MjA5LCJleHAiOjE3NDcwMzc4MDl9.sm74O4vOk6Hb5cUPDyLvAzJXKwNM6y8rOtJE00gruoM
 
 {
   "name": "Bluebird Powder Day Crew",
@@ -52,11 +52,22 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5Yzg0MGMyZC03
   "meetUpCity": "Salt Lake City",
   "meetUpState": "UT",
   "meetUpZipCode": "84121",
-  "resortId": "bb4d2fef-cd71-459a-b1a2-c6b78c70797c",
+  "resortId": "562b200c-94c3-45cb-a646-8416d73bda0c",
   "departureDate": "2025-01-15T06:00:00.000Z",
   "departureTime": "6:00 AM",
   "returningDate": "2025-01-15T16:00:00.000Z",
   "returningTime": "4:00 PM"
 }
 
+###
+GET {{base_url}}/carpools
 
+
+###
+GET {{base_url}}/get_carpools_by_resort/562b200c-94c3-45cb-a646-8416d73bda0c
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlZjE2NWUwMy1kOTE2LTRhNTItOTY0YS05NDJhNmRhMjRiZGUiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM1MjAyLCJleHAiOjE3NDcwMzg4MDJ9.6Hg88PieAJUqM4ECPx03Y-6b7wkwTbURyfBpdFK5bIc
+
+### Get carpool conversation with messages, creator, and participants
+
+GET {{base_url}}/get_carpool_conversation/1ea4bf8a-be4c-4f41-af6d-1ce27b8b63ca
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlZjE2NWUwMy1kOTE2LTRhNTItOTY0YS05NDJhNmRhMjRiZGUiLCJ1c2VyRW1haWwiOiJqb2huLmRvZTVAZ21haWwuY29tIiwiaWF0IjoxNzQ3MDM1MjAyLCJleHAiOjE3NDcwMzg4MDJ9.6Hg88PieAJUqM4ECPx03Y-6b7wkwTbURyfBpdFK5bIc
