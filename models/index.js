@@ -17,10 +17,7 @@ Vehicle.belongsTo(User, { as: 'user', foreignKey: 'userId' });
 // A User can create many Carpools
 User.hasMany(Carpool, { as: 'createdCarpools', foreignKey: 'createdBy' });
 
-// A Carpool is created by a User
 Carpool.belongsTo(User, { as: 'creator', foreignKey: 'createdBy' });
-
-// A Carpool belongs to a Resort
 Carpool.belongsTo(Resort, { as: 'resort', foreignKey: 'resortId' });
 
 // Conversation belongs to a Carpool
