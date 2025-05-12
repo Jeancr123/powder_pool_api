@@ -36,6 +36,10 @@ const Resort = sequelize.define('resort', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   }); 
 
 module.exports = Resort;
