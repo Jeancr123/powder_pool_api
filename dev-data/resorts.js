@@ -14,7 +14,7 @@ const resortSeeds = [
     city: "Park City",
     state: "UT",
     zipCode: "84060",
-    imageUrl: "https://example.com/images/deer_valley.jpg",
+    imageUrl: "https://powder-pool-images.s3.us-east-2.amazonaws.com/deer_valley.png",
     description: "Deer Valley is a luxury ski resort known for its immaculate groomed runs and skier-only policy. It offers upscale amenities and stunning views of the Wasatch Range."
   },
   {

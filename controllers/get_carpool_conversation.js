@@ -1,4 +1,4 @@
-const { Conversation, ConversationMessage, Carpool, User } = require('../models/index');
+const { Conversation, ConversationMessage, Carpool, User, Resort } = require('../models/index');
 
 module.exports = async (req, res) => {
   try {
@@ -20,22 +20,18 @@ module.exports = async (req, res) => {
             }
           ]
         },
-        // {
-        //   model: Carpool,
-        //   include: [
-        //     {
-        //       model: User,
-        //       as: 'creator',
-        //       attributes: ['id', 'firstName', 'lastName', 'email']
-        //     },
-        //     {
-        //       model: User,
-        //       as: 'participants',
-        //       attributes: ['id', 'firstName', 'lastName', 'email'],
-        //       through: { attributes: [] }
-        //     }
-        //   ]
-        // }
+        {
+          model: Carpool,
+          as: 'carpool',
+          attributes: ['id', 'name', 'description', 'meetupAddress', 'meetUpCity', 'meetUpState', 'meetUpZipCode', 'resortId', 'departureDate', 'departureTime', 'returningDate', 'returningTime'],
+          include: [
+            {
+              model: Resort,
+              as: 'resort',
+              attributes: ['id', 'name', 'address', 'city', 'state', 'zipCode', 'description', 'imageUrl']
+            },
+          ]
+        }
       ]
     });
 
