@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     });
 
     if (!conversation) {
-      return res.status(200).json([]);
+      return res.status(200).json({});
     }
 
     return res.status(200).json(conversation);
