@@ -19,7 +19,11 @@ User.hasMany(Carpool, { as: 'createdCarpools', foreignKey: 'createdBy' });
 
 Carpool.belongsTo(User, { as: 'creator', foreignKey: 'createdBy' });
 Carpool.belongsTo(Resort, { as: 'resort', foreignKey: 'resortId' });
-
+Conversation.belongsTo(Carpool, { as: 'carpool', foreignKey: 'carpoolId' });
+Carpool.hasOne(Conversation, {
+  foreignKey: 'carpoolId',
+  as: 'conversation',
+});
 // Conversation belongs to a Carpool
 Conversation.belongsTo(Carpool, { foreignKey: 'carpoolId' });
 
